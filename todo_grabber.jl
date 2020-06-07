@@ -12,8 +12,14 @@ function find_todos(filename::String)
     return captures
 end
 
-function write_todos()
-    open("/tmp/todostack.org","a")
+function write_todos(filename::String, todo_array::Array{String,1})
+    open("/tmp/todostack.org","a") do file
+        write(file, string("* ", filename, "\n"))
+        for todo in todo_array
+            write(file, string("** ", todo, "\n"))
+        end
+    end
+
     return nothing
 end
 
@@ -29,13 +35,14 @@ function get_filenames()
 end
 
 
-fl = get_filenames()
+filenames = get_filenames()
 # println(fl)
 
 println("DBG: These are the whole lines that match the regex")
-for fli in fl
-    a = find_todos(fli)
-    for suba in a
-        println(suba)
+for file in filenames
+    todos = find_todos(file)
+    write_todos(file, todos)
+    for todo in todos
+        println(todo)
     end
 end
