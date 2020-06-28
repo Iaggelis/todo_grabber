@@ -1,6 +1,8 @@
+export get_filenames, find_todos, write_todos
+
 function get_filenames()
     files = String[]
-    for f in readdir("./tests/", join=true)
+    for f in readdir(abspath("./tests/"), join=true)
         if f == "todo_grabber.jl"
             continue
         end
@@ -37,14 +39,3 @@ end
 
 
 
-filenames = get_filenames()
-# println(fl)
-
-println("DBG: These are the whole lines that match the regex")
-for file in filenames
-    todos = find_todos(file)
-    write_todos(file, todos)
-    for todo in todos
-        println(todo)
-    end
-end

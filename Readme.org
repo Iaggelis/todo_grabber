@@ -1,3 +1,16 @@
 #+TITLE: TODO Grabber
 * **THIS IS WORK IN PROGRESS**
 Todo grabber is a julia program searching TODOs in files
+
+
+#+BEGIN_SRC sh
+julia> using TodoGrabber
+julia> TodoGrabber.main()
+DBG: These are the whole lines that match the regex
+Another todo stuff to grep
+cpp comment
+python comment
+this is a C todo description
+another thing to go to todo
+oh that is a latex??
+#+END_SRC

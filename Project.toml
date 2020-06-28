@@ -1,0 +1,4 @@
+name = "TodoGrabber"
+uuid = "1ba9210d-0f94-4a7b-9086-2b31eaec1c9b"
+authors = ["Iaggelis <john_agelis@hotmail.com>"]
+version = "0.1.0"
