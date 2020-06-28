@@ -15,7 +15,7 @@ function find_todos(filename::String)
     open(filename) do file
         for line in eachline(file)
             m = match(r"^(.*)TODO: (.*)$", line)
-            if m != nothing
+            if m !== nothing
                 cleaned_capture = strip(m.captures[2], ['-','*','>',' ', '/'])
                 push!(captures, cleaned_capture)
             end
@@ -25,7 +25,7 @@ function find_todos(filename::String)
 end
 
 function write_todos(filename::String, todo_array::Array{String,1})
-    open("/tmp/todostack.org","a") do file
+    open("/tmp/todostack.org", "a") do file
         write(file, string("* ", filename, "\n"))
         for todo in todo_array
             write(file, string("** [[TODO]] ", todo, "\n"))
