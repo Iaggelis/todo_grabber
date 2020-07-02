@@ -9,18 +9,22 @@ function get_filenames(fpath::String)
 end
 
 
-function find_todos(filename::String)
-    captures = String[]
-    open(filename) do file
-        for line in eachline(file)
-            m = match(r"^(.*)TODO: (.*)$", line)
-            if m !== nothing
-                cleaned_capture = strip(m.captures[2], ['-','*','>',' ', '/'])
-                push!(captures, cleaned_capture)
+function find_todos(target_files::Vector{String})
+    todo_dict = Dict{String,Vector{String}}()
+    for filename in target_files
+        captures = String[]
+        open(filename) do file
+            for line in eachline(file)
+                m = match(r"^(.*)TODO: (.*)$", line)
+                if m !== nothing
+                    cleaned_capture = strip(m.captures[2], ['-','*','>',' ', '/'])
+                    push!(captures, cleaned_capture)
+                end
             end
         end
+        todo_dict[filename] = captures;
     end
-    return captures
+    return todo_dict;
 end
 
 function write_todos(filenames::Vector{String}, filename::String,

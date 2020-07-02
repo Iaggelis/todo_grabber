@@ -1,6 +1,5 @@
 module TodoGrabber
 
-include("grabber.jl")
-include("run.jl")
+include("grabber.jl");
 
 end # module
