@@ -37,12 +37,17 @@ function find_todos(target_files::Vector{String})
     return todo_dict
 end
 
-function write_todos(targetfile::String, tododict::Dict{String,Vector{String}})
+function write_todos(targetfile::String,
+                     tododict::Union{Dict{String,Vector{String}}, Nothing})
+    if tododict == nothing
+        printstyled(stderr, "No todos found", color = :red)
+        return nothing
+    end
     open(targetfile, "a") do tfile
         for (fname, todo_vec) in tododict
             write(tfile, string("* ", fname, "\n"))
-            for todo in todo_vec
-                write(tfile, string("** [[TODO]] ", todo, "\n"))
+            for (i,todo) in enumerate(todo_vec)
+                write(tfile, string("** [[TODO]] ", i," ", todo, "\n"))
             end
         end
     end
@@ -51,4 +56,17 @@ function write_todos(targetfile::String, tododict::Dict{String,Vector{String}})
 end
 
 
+function save_dict(targetfile::String, tododict::Dict{String,Vector{String}})
+    serialize(targetfile, tododict)
+end
 
+
+function grab_dir(directory::String, target_file::String="")
+    filenames = get_filenames(directory)
+    todos = find_todos(filenames)
+    if target_file == nothing
+        write_todos("temp_stack.org", todos)
+    else
+        write_todos(target_file, todos)
+    end
+end
