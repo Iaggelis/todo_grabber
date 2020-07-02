@@ -1,4 +1,8 @@
-export get_filenames, find_todos, write_todos
+using Serialization
+
+using TodoGrabber
+export get_filenames, find_todos, write_todos, save_dict, grab_dir
+
 
 function get_filenames(fpath::String)
     files = String[]
