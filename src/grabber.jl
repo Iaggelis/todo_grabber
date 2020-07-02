@@ -33,13 +33,12 @@ function find_todos(target_files::Vector{String})
     return todo_dict
 end
 
-function write_todos(filenames::Vector{String}, filename::String,
-                     todo_array::Array{String,1})
-    open(filename, "a") do file
-        for fname in filenames
-            write(file, string("* ", fname, "\n"))
-            for todo in todo_array
-                write(file, string("** [[TODO]] ", todo, "\n"))
+function write_todos(targetfile::String, tododict::Dict{String,Vector{String}})
+    open(targetfile, "a") do tfile
+        for (fname, todo_vec) in tododict
+            write(tfile, string("* ", fname, "\n"))
+            for todo in todo_vec
+                write(tfile, string("** [[TODO]] ", todo, "\n"))
             end
         end
     end
