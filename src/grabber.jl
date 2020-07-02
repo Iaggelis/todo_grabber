@@ -22,9 +22,15 @@ function find_todos(target_files::Vector{String})
                 end
             end
         end
-        todo_dict[filename] = captures;
+        if isempty(captures) # only push todos when they exist
+            continue
+        end
+        todo_dict[filename] = captures
     end
-    return todo_dict;
+    if isempty(todo_dict)
+        return nothing
+    end
+    return todo_dict
 end
 
 function write_todos(filenames::Vector{String}, filename::String,
