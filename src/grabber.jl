@@ -1,11 +1,8 @@
 export get_filenames, find_todos, write_todos
 
-function get_filenames()
+function get_filenames(fpath::String)
     files = String[]
-    for f in readdir(abspath("./tests/"), join=true)
-        if f == "todo_grabber.jl"
-            continue
-        end
+    for f in readdir(abspath(fpath), join=true)
         push!(files, f)
     end
     return files
@@ -26,11 +23,14 @@ function find_todos(filename::String)
     return captures
 end
 
-function write_todos(filename::String, todo_array::Array{String,1})
-    open("/tmp/todostack.org", "a") do file
-        write(file, string("* ", filename, "\n"))
-        for todo in todo_array
-            write(file, string("** [[TODO]] ", todo, "\n"))
+function write_todos(filenames::Vector{String}, filename::String,
+                     todo_array::Array{String,1})
+    open(filename, "a") do file
+        for fname in filenames
+            write(file, string("* ", fname, "\n"))
+            for todo in todo_array
+                write(file, string("** [[TODO]] ", todo, "\n"))
+            end
         end
     end
 
