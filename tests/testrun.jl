@@ -8,5 +8,5 @@ function main()
     TodoGrabber.write_todos("./tests/todostack.org", todos)
     TodoGrabber.save_dict("serial.bin", todos)
 end
-
+# TODO: write second way of usage
 main()
