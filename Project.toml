@@ -1,0 +1,8 @@
+name = "TodoGrabber"
+uuid = "1ba9210d-0f94-4a7b-9086-2b31eaec1c9b"
+authors = ["Iaggelis <john_agelis@hotmail.com>"]
+version = "0.1.0"
+
+[deps]
+Base64 = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
+Serialization = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
