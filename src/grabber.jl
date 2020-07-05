@@ -61,10 +61,12 @@ function save_dict(targetfile::String, tododict::Dict{String,Vector{String}})
 end
 
 
-function grab_dir(directory::String, target_file::String="")
+function grab_dir(directory::String; target_file::String="")
     filenames = get_filenames(directory)
     todos = find_todos(filenames)
-    if target_file == nothing
+    if isempty(target_file)
+        printstyled(stderr, "No output file given. Writing on temp_stack.org",
+                    color = :yellow)
         write_todos("temp_stack.org", todos)
     else
         write_todos(target_file, todos)
