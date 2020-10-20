@@ -5,6 +5,7 @@ Todo grabber is a julia program searching TODOs in files
 Basic usage (for now)
 #+BEGIN_SRC sh
 julia> using TodoGrabber
-julia> TodoGrabber.grab("./tests/")
+julia> TodoGrabber.grab_dir("./tests/")
+...
 No output file given. Writing on temp_stack.org
 #+END_SRC
