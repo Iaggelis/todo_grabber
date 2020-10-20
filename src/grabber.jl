@@ -15,7 +15,7 @@ end
 
 function write_todos(tododict::Union{Dict{String,Vector{Todo}},Nothing},
                      targetfile::String)
-    if tododict !== nothing
+    if tododict === nothing
         printstyled(stderr, "No todos found", color=:red)
         return nothing
     end
@@ -46,12 +46,11 @@ function grab_dir(directory::String; target_file::String="")
     todos = find_todos(filenames)
     save_dict(todos)
     if isempty(target_file)
-        printstyled(stderr, "No output file given. Writing on temp_stack.org",
-                    color=:yellow)
-        write_todos("./tests/temp_stack.org", todos)
+        println(stdout, "[NOTE] No output file given. Writing on temp_stack.org")
+        write_todos(todos, "./tests/temp_stack.org")
     else
         println(stdout, "Writing on $target_file")
-        write_todos(target_file, todos)
+        write_todos(todos, target_file)
     end
     return nothing
 end
