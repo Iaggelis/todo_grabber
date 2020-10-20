@@ -1,7 +1,6 @@
 using SQLite, Tables, Printf
 
 
-export storetodos
 
 
 function storetodos(tododict::Union{Nothing, Dict{String, Vector{Todo}}};

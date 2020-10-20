@@ -2,8 +2,6 @@ using Serialization
 
 using TodoGrabber
 
-export get_filenames, find_todos, write_todos, save_dict, grab_dir,
-    find_todos_struct
 const cachefile = "./tests/serial_cache.bin"
 
 function get_filenames(fpath::String)

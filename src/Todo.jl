@@ -1,5 +1,3 @@
-export Todo
-
 mutable struct Todo
     Prefix::String
     Suffix::String
